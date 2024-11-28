@@ -3,15 +3,15 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export const addCarrera = async (req, res) => {
-    const { name, duracion } = req.body;
+    const { name } = req.body;
 
     try {
 
         const searchCarrera = await prisma.carrera.findUnique({
             where: {
-                nombreCarrera: name,
+                name,
             },
-        });
+        })
 
         if (searchCarrera) {
             return res.status(400).json({
@@ -21,12 +21,17 @@ export const addCarrera = async (req, res) => {
 
         const carrera = await prisma.carrera.create({
             data: {
-                nombreCarrera: name,
-                duracion,
+                nombre: name,
             },
         });
-        res.status(201).json({ message: "Carrera created", carrera: carrera });
+
+        return res.status(201).json({
+            message: "Carrera created successfully",
+            carrera,
+        });
     } catch (error) {
-        res.status(500).json({ message: "Internal server error", error: error.message });
+        return res.status(500).json({
+            message: "Error creating carrera",
+        });
     }
 };
