@@ -2,30 +2,28 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-export const addCarrera = async (req, res) => {
-    const { name, duracion } = req.body;
+export const deleteCarrera = async (req, res) => {
+    const { id } = req.params;
 
     try {
-
         const searchCarrera = await prisma.carrera.findUnique({
             where: {
-                nombreCarrera: name,
+                id: parseInt(id),
             },
         });
 
-        if (searchCarrera) {
+        if (!searchCarrera) {
             return res.status(400).json({
-                message: "Carrera already exists",
+                message: "Carrera not found",
             });
         }
 
-        const carrera = await prisma.carrera.create({
-            data: {
-                nombreCarrera: name,
-                duracion,
+        const carrera = await prisma.carrera.delete({
+            where: {
+                id: parseInt(id),
             },
         });
-        res.status(201).json({ message: "Carrera created", carrera: carrera });
+        res.status(200).json({ message: "Carrera deleted", carrera: carrera });
     } catch (error) {
         res.status(500).json({ message: "Internal server error", error: error.message });
     }
