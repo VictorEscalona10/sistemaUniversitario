@@ -32,8 +32,7 @@ export const addCarrera = async (req, res) => {
         });
     } catch (error) {
         return res.status(500).json({
-            message: "Error creating carrera",
-            error: error.message,
+            message: "Error creating carrera"
         });
     }
 };
