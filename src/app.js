@@ -3,7 +3,6 @@ import cookieParser from "cookie-parser";
 import { router as registerAdminRoutes } from "./routes/auth/registerAdmin.routes.js";
 import { router as loginAdminRoutes } from "./routes/auth/loginAdmin.routes.js";
 
-
 import { router as addCarreraRoutes } from "./routes/carreras/addCarrera.routes.js";
 import {router as carrerasRoutes} from "./routes/carreras/carrera.routes.js"
 import { router as updateCarreraRoutes } from "./routes/carreras/updateCarrera.routes.js";
