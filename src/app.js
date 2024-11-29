@@ -13,6 +13,7 @@ export const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
+app.get("/", (req, res) => res.send("Bienvenido!"));
 app.use("/admin", registerAdminRoutes, loginAdminRoutes);
 app.use("/carreras", addCarreraRoutes, carrerasRoutes, updateCarreraRoutes, deleteCarreraRoutes);
 

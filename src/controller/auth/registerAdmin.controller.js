@@ -1,8 +1,6 @@
-import { PrismaClient } from "@prisma/client";
+import {prisma} from "../../lib/prisma.js";
 import bcrypt from "bcrypt";
 import { SALT } from "../../config/config.js";
-
-const prisma = new PrismaClient();
 
 export const registerAdmin = async (req, res) => {
     const { name, lastName, email, password } = req.body;
