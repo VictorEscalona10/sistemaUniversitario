@@ -1,6 +1,4 @@
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import {prisma} from "../../lib/prisma.js";
 
 export const addCarrera = async (req, res) => {
     const { name, duracion } = req.body;

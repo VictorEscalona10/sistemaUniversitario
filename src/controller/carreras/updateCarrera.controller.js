@@ -1,6 +1,4 @@
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import { prisma } from "../../lib/prisma.js";
 
 export const updateCarrera = async (req, res) => {
     const { id } = req.params;
