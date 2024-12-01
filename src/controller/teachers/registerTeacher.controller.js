@@ -25,6 +25,6 @@ export const registerTeacher = async (req, res) => {
         });
         res.status(201).json({ message: "Teacher created successfully", teacher: teacher });
     } catch (error) {
-        res.status(500).json({ message: "Internal server error", error: error.message });
+        res.status(500).json({ message: "Internal server error"});
     }
 };
