@@ -19,6 +19,9 @@ import {router as getStudentsRoutes} from "./routes/students/getStudents.routes.
 import {router as updateStudentRoutes} from "./routes/students/updateStudent.routes.js"
 import {router as deleteStudentRoutes} from "./routes/students/deleteStudent.routes.js"
 
+import { router as registerTeacherRoutes } from "./routes/teachers/registerTeacher.routes.js";
+import { router as getTeachersRoutes } from "./routes/teachers/getTechars.routes.js";
+
 export const app = express();
 
 app.use(express.json());
@@ -29,5 +32,6 @@ app.use("/admin", registerAdminRoutes, loginAdminRoutes);
 app.use("/carreras", addCarreraRoutes, carrerasRoutes, updateCarreraRoutes, deleteCarreraRoutes, getSubjectsCarreraRoutes);
 app.use("/subjects", addSubjectRoutes, getSubjectRoutes, updateSubjectRoutes, deleteSubjectRoutes);
 app.use("/students", registerStudentRoutes, updateStudentRoutes, getStudentsRoutes, deleteStudentRoutes);
+app.use("/teachers", registerTeacherRoutes, getTeachersRoutes);
 
 
