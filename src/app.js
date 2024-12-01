@@ -18,9 +18,13 @@ import {router as registerStudentRoutes} from "./routes/students/registerStudent
 import {router as getStudentsRoutes} from "./routes/students/getStudents.routes.js"
 import {router as updateStudentRoutes} from "./routes/students/updateStudent.routes.js"
 import {router as deleteStudentRoutes} from "./routes/students/deleteStudent.routes.js"
+import {router as getStudentsByCarreraAndAnio} from "./routes/students/getStudentsByCarreraAndAnio.routes.js"
 
 import { router as registerTeacherRoutes } from "./routes/teachers/registerTeacher.routes.js";
 import { router as getTeachersRoutes } from "./routes/teachers/getTechars.routes.js";
+
+import { router as addNotesRoutes } from "./routes/notes/addNotes.routes.js";
+import { router as getNotesForStudent } from "./routes/notes/getNotesForStudent.routes.js";
 
 export const app = express();
 
@@ -31,7 +35,9 @@ app.get("/", (req, res) => res.send("Bienvenido!"));
 app.use("/admin", registerAdminRoutes, loginAdminRoutes);
 app.use("/carreras", addCarreraRoutes, carrerasRoutes, updateCarreraRoutes, deleteCarreraRoutes, getSubjectsCarreraRoutes);
 app.use("/subjects", addSubjectRoutes, getSubjectRoutes, updateSubjectRoutes, deleteSubjectRoutes);
-app.use("/students", registerStudentRoutes, updateStudentRoutes, getStudentsRoutes, deleteStudentRoutes);
+app.use("/students", registerStudentRoutes, updateStudentRoutes, getStudentsRoutes, deleteStudentRoutes, getStudentsByCarreraAndAnio);
 app.use("/teachers", registerTeacherRoutes, getTeachersRoutes);
+app.use("/notes", addNotesRoutes, getNotesForStudent);
+
 
 
