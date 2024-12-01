@@ -1,11 +1,15 @@
-import jwt from 'jsonwebtoken';
-import { JWT_SECRET } from '../config/config.js';
+import jwt from "jsonwebtoken";
+import { JWT_SECRET } from "../config/config.js";
 
 export const authenticateToken = (req, res, next) => {
+  if (!req.cookies) {
+    return res.status(401).json({ message: "Access denied" });
+  }
+
   const token = req.cookies.authToken;
 
   if (!token) {
-    return res.status(401).json({ message: 'Access denied' });
+    return res.status(401).json({ message: "Access denied" });
   }
 
   try {
@@ -13,6 +17,12 @@ export const authenticateToken = (req, res, next) => {
     req.user = verified;
     next();
   } catch (error) {
-    res.status(400).json({ message: 'Invalid token' });
+    if (error.name === "TokenExpiredError") {
+      return res.status(401).json({ message: "Token expired" });
+    } else if (error.name === "JsonWebTokenError") {
+      return res.status(401).json({ message: "Invalid token" });
+    } else {
+      return res.status(500).json({ message: "Internal server error" });
+    }
   }
 };

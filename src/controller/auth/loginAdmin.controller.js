@@ -31,14 +31,14 @@ export const loginAdmin = async (req, res) => {
         }
 
         const token = jwt.sign({ id: admin.id }, JWT_SECRET, {
-            expiresIn: "1d",
+            expiresIn: "1h",
         });
 
         res.cookie("authToken", token, {
             httpOnly: true,
             secure: false,
-            sameSite: "lax",
-            expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
+            sameSite: "strict",
+            expires: new Date(Date.now() + 3600000),
         });
 
         return res.status(200).json({
@@ -47,6 +47,7 @@ export const loginAdmin = async (req, res) => {
     } catch (error) {
         return res.status(500).json({
             message: "Internal server error", 
+            error: error.message
         });
     }
 }
