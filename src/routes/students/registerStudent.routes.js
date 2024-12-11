@@ -1,9 +1,16 @@
 import { Router } from "express";
 import { registerStudent } from "../../controller/students/registerStudent.controller.js";
-import { authenticateToken } from "../../middlewares/verifyJWT.js";
-import { validateStudent } from "../../middlewares/dataValidation.js";
+import { nameValidation, lastNameValidation, identificationValidation, idCarreraValidation } from "../../middlewares/validation/fieldsValidation.js";
 import { validate } from "../../middlewares/dataValidation.js";
+import { authenticateToken } from "../../middlewares/verifyJWT.js";
 
 export const router = Router();
 
-router.post("/register", authenticateToken, validateStudent, validate, registerStudent);
+let registerStudentValidation = [
+    nameValidation,
+    lastNameValidation,
+    identificationValidation,
+    idCarreraValidation
+]
+
+router.post("/register", authenticateToken, registerStudentValidation, validate, registerStudent);
